@@ -21,11 +21,7 @@ stack<T>::stack() : array_size_(0), count_(0)
 	array_ = new T;
 };
 
-/*template <typename T>
-stack<T>::~stack()
-{
-	delete[] array_;
-};*/
+
 
 template <typename T>
 size_t  stack<T>::count() const
