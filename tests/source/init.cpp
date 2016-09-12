@@ -1,4 +1,4 @@
-#include <stack.h>
+#include <Stack.h>
 //#include <Node.hpp>
 #include <catch.hpp>
 
