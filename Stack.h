@@ -69,7 +69,6 @@ void stack<T>::push(T const &value)
 	{
 	    int size=array_size_*2+(array_size_ == 0);
 		T * array_new = new T[size];
-		//array_ = new T[array_size_ * 2];
 		for (int i = 0; i < count_; i++)
 		{
 			array_new[i] = array_[i];
@@ -77,7 +76,7 @@ void stack<T>::push(T const &value)
 		delete[] array_;
 		array_new[count_]=value;
 		array_ = array_new;
-		array_size_ = size;//array_new = new T[array_size_];
+		array_size_ = size;
 		++count_;
 		
 	}
