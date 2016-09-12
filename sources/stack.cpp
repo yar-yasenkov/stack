@@ -6,7 +6,7 @@
 #include <iostream>
 
 using namespace std;
-int _tmain(int argc, _TCHAR* argv[])
+/*int _tmain(int argc, _TCHAR* argv[])
 {
 	char comm[6];
 	char push[6] = "push";
@@ -48,3 +48,4 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 
+*/
