@@ -2,6 +2,18 @@
 //#include <Node.hpp>
 #include <catch.hpp>
 
+
+SCENARIO("Stack init", "[init"){
+	bool mark;
+	Stack<int> stack;
+	if (stack.count()!=0)
+	{
+		mark=true;
+	}
+	REQUIRE(mark);
+}
+
+
 /*
 SCENARIO("Tree init", "[init]") {
          Tree<int> inttree;
