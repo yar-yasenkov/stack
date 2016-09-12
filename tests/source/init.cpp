@@ -32,4 +32,5 @@ SCENARIO("Stack pop", "[pop]"){
 	{
 		mark=true;
 	}
+	REQUIRE(mark);
 }
