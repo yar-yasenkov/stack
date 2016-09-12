@@ -1,8 +1,8 @@
-#include <tree.hpp>
-#include <Node.hpp>
+#include <stack.h>
+//#include <Node.hpp>
 #include <catch.hpp>
 
-
+/*
 SCENARIO("Tree init", "[init]") {
          Tree<int> inttree;
          bool mark=false;
@@ -119,4 +119,4 @@ SCENARIO("Delete node","[delete n]") {
 	 REQUIRE(inttree.search(inttree.get_root(),3));
 }
 
-
+*/
