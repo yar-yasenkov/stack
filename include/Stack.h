@@ -1,5 +1,5 @@
 #include <cstring>
-
+#include <iostream>
 
 template <typename T>
 class stack
