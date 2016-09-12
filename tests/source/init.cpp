@@ -6,6 +6,8 @@
 SCENARIO("Stack init", "[init"){
 	bool mark=false;
 	stack<int> st;
+	st.push(1);
+	st.push(2);
 	if (st.count()!=0)
 	{
 		mark=true;
