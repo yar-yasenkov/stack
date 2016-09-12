@@ -4,9 +4,9 @@
 
 
 SCENARIO("Stack init", "[init"){
-	bool mark;
-	Stack<int> stack;
-	if (stack.count()!=0)
+	bool mark=false;
+	stack<int> st;
+	if (st.count()!=0)
 	{
 		mark=true;
 	}
