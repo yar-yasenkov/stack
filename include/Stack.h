@@ -21,7 +21,7 @@ private:
 };
 
 template <typename T>
-void new_copy(T & array_,const stack<T> & obj)
+void new_copy(T array_,const stack<T> & obj)
 {
 	array_ = new T[obj.array_size_];
 	std::copy(obj.array_,obj.array_+obj.count_,array_);
