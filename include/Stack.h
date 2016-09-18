@@ -1,12 +1,6 @@
 #include <cstring>
 #include <iostream>
 
-template <typename T>
-void new_copy(stack & array_,const stack & obj)
-{
-	array_ = new T[obj.array_size_];
-	std::copy(obj.array_,obj.array_+obj.count_,array_)
-}
 
 
 template <typename T>
@@ -25,6 +19,14 @@ private:
 	size_t array_size_;
 	size_t count_;
 };
+
+template <typename T>
+void new_copy(stack & array_,const stack & obj)
+{
+	array_ = new T[obj.array_size_];
+	std::copy(obj.array_,obj.array_+obj.count_,array_)
+}
+
 
 template <typename T>
 stack<T>::stack() : array_size_(0), count_(0), array_(nullptr)
