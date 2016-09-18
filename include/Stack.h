@@ -14,6 +14,7 @@ public:
 	size_t count() const;
 	void push(T const &);
 	T pop();
+	auto new_copy(const T*, size_t, size_t)->T*;
 private:
 	T * array_;
 	size_t array_size_;
@@ -21,10 +22,11 @@ private:
 };
 
 template <typename T>
-void new_copy(T array_,const stack<T> & obj)
+auto stack<T>::new_copy(const T * source,  size_t new_size,size_t current_size) -> T*
 {
-	array_ = new T[obj.array_size_];
-	std::copy(obj.array_,obj.array_+obj.count_,array_);
+        T * new_array = new T[new_size];
+	std::copy(source, source + current_size, new_array);
+	return new_array;
 }
 
 
@@ -33,10 +35,8 @@ stack<T>::stack() : array_size_(0), count_(0), array_(nullptr)
 {};
 
 template <typename T>
-stack<T>::stack(const stack & obj) 
-{
-	new_copy(array_,obj);
-}
+stack<T>::stack(const stack & obj):count_(obj.count_,array_size(obj.array_size_),array_(new_copy(obj.array_,obj.array_size_,obj.count_))
+{}
 
 template <typename T>
 stack<T>::~stack()
@@ -53,7 +53,7 @@ stack<T> & stack<T>::operator=(const stack & st)
 		delete[] array_;
 		array_size_ = st.array_size_;
 		count_ = st.count_;
-		new_copy(array_,st);
+		array_=new_copy(st.array_,st.array_size_,st.count_);
 	}
 	return *this;
 }
@@ -71,7 +71,7 @@ void stack<T>::push(T const &value)
 	{
 	    int size=array_size_*2+(array_size_ == 0);
 		T * array_new = new T[size];
-		std::copy(array_,array_+count_,array_new);
+		array_new=new_copy(array_,array_size_,count_);
 		delete[] array_;
 		array_new[count_]=value;
 		array_ = array_new;
