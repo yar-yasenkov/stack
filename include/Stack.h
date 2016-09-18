@@ -53,7 +53,7 @@ stack<T> & stack<T>::operator=(const stack & st)
 		delete[] array_;
 		array_size_ = st.array_size_;
 		count_ = st.count_;
-		new_copy(array_,st)
+		new_copy(array_,st);
 	}
 	return *this;
 }
