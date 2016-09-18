@@ -27,7 +27,7 @@ auto stack<T>::new_copy(const T * source,  size_t new_size,size_t current_size) 
         T * new_array = new T[new_size];
 	std::copy(source, source + current_size, new_array);
 	return new_array;
-}
+};
 
 
 template <typename T>
@@ -35,8 +35,8 @@ stack<T>::stack() : array_size_(0), count_(0), array_(nullptr)
 {};
 
 template <typename T>
-stack<T>::stack(const stack & obj):count_(obj.count_,array_size(obj.array_size_),array_(new_copy(obj.array_,obj.array_size_,obj.count_))
-{}
+stack<T>::stack(const stack & obj):count_(obj.count_,array_size(obj.array_size_)),array_(new_copy(obj.array_,obj.array_size_,obj.count_))
+{};
 
 template <typename T>
 stack<T>::~stack()
