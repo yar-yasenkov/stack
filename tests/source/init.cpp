@@ -2,10 +2,15 @@
 #include <catch.hpp>
 
 
-SCENARIO("Stack init", "[init"){
+SCENARIO("Stack count", "[count]"){
 	bool mark=false;
 	stack<int> st;
 	if ((st.count()==0))
+	{
+		mark=true;
+	}
+	st.push(1);
+	if ((st.count()==1))
 	{
 		mark=true;
 	}
@@ -16,8 +21,7 @@ SCENARIO("Stack push", "[push]"){
 	bool mark=false;
 	stack<int> st;
 	st.push(1);
-	st.push(2);
-	if ((st.count()==2)&&(st.pop()==2)&&(st.pop()==1))
+	if ((st.count()==1)&&(st.pop()==1))
 	{
 		mark=true;
 	}
@@ -33,4 +37,16 @@ SCENARIO("Stack pop", "[pop]"){
 		mark=true;
 	}
 	REQUIRE(mark);
+}
+
+SCENARIO("Assign", "[assign]"){
+	bool mark=false;
+	stack<int> st;
+	st.push(10);
+	stack<int> st_;
+	st_=st;
+	if ((st_.count()==1)&(st_.pop()==10))
+	{
+		mark=true;
+	}
 }
