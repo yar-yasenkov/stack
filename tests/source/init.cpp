@@ -49,4 +49,17 @@ SCENARIO("Assign", "[assign]"){
 	{
 		mark=true;
 	}
+	REQUIRE(mark);
+}
+
+SCENARIO("Copy","[copy]"){
+	bool mark=false;
+	stack<int> st;
+	st.push(10);
+	stack<int> st_=st;
+	if ((st_.count()==1)&(st_.pop()=10))
+	{
+		mark=true;
+	}
+	REQUIRE(mark);
 }
