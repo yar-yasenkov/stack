@@ -88,7 +88,7 @@ void stack<T>::push(T const &value)
 template <typename T>
 T stack<T>::pop()
 {
-	if (count_ > 0)
+	if (count_ < 0)
 	{
 		throw "out of stack";
 	}
