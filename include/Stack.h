@@ -34,7 +34,7 @@ stack<T>::stack() : array_size_(0), count_(0), array_(nullptr)
 {};
 
 template <typename T>
-stack<T>::stack(const stack & obj):count_(obj.count_,array_size(obj.array_size_)),array_(new_copy(obj.array_,obj.array_size_,obj.count_))
+stack<T>::stack(const stack & obj):count_(obj.count_),array_size_(obj.array_size_),array_(new_copy(obj.array_,obj.array_size_,obj.count_))
 {};
 
 template <typename T>
