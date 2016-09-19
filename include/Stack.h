@@ -71,22 +71,19 @@ void stack<T>::push(T const &value)
 	    int size=array_size_*2+(array_size_ == 0);
 		T * array_new=new_copy(array_,size,count_);
 		delete[] array_;
-		array_new[count_]=value;
+	
 		array_ = array_new;
 		array_size_ = size;
-		++count_;
+
 		
 	}
-	else
-	{
 		array_[++count_] = value;
-	}
 };
 
 template <typename T>
 T stack<T>::pop()
 {
-	if (count_ <= 0)
+	if (count_ == 0)
 	{
 		throw "out of stack";
 	}
