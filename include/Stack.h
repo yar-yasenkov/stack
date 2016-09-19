@@ -14,7 +14,7 @@ public:
 	size_t count() const;
 	void push(T const &);
 	T pop();
-	auto new_copy(const T*, size_t, size_t)->T*;
+	//auto new_copy(const T*, size_t, size_t)->T*;
 private:
 	T * array_;
 	size_t array_size_;
@@ -22,7 +22,7 @@ private:
 };
 
 template <typename T>
-auto stack<T>::new_copy(const T * source,  size_t new_size,size_t current_size) -> T*
+auto new_copy(const T * source,  size_t new_size,size_t current_size) -> T*
 {
         T * new_array = new T[new_size];
 	std::copy(source, source + current_size, new_array);
