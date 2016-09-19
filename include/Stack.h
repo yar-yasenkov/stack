@@ -14,7 +14,6 @@ public:
 	size_t count() const;
 	void push(T const &);
 	T pop();
-	//auto new_copy(const T*, size_t, size_t)->T*;
 private:
 	T * array_;
 	size_t array_size_;
@@ -71,6 +70,7 @@ void stack<T>::push(T const &value)
 	{
 	    int size=array_size_*2+(array_size_ == 0);
 		T * array_new = new T[size];
+		
 		array_new=new_copy(array_,array_size_,count_);
 		delete[] array_;
 		array_new[count_]=value;
@@ -88,12 +88,7 @@ void stack<T>::push(T const &value)
 template <typename T>
 T stack<T>::pop()
 {
-	
-	if (array_size_ == 0)
-	{
-		throw "stack does not exist";
-	}
-	if ((count_ <= 0)||(count_>array_size_))
+	if (count_ > 0)
 	{
 		throw "out of stack";
 	}
