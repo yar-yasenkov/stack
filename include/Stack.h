@@ -69,7 +69,7 @@ void stack<T>::push(T const &value)
 	if (array_size_ == count_)
 	{
 	    int size=array_size_*2+(array_size_ == 0);
-		T * array_new=new_copy(array_,array_size_,count_);
+		T * array_new=new_copy(array_,size,count_);
 		delete[] array_;
 		array_new[count_]=value;
 		array_ = array_new;
