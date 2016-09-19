@@ -71,13 +71,12 @@ void stack<T>::push(T const &value)
 	    int size=array_size_*2+(array_size_ == 0);
 		T * array_new=new_copy(array_,size,count_);
 		delete[] array_;
-	
 		array_ = array_new;
-		array_size_ = size;
-		
+		array_size_=size;
 	}
 	
-		array_[++count_] = value;
+		array_[count_] = value;
+		++count_;
 };
 
 template <typename T>
