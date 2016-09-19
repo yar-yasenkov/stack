@@ -74,9 +74,9 @@ void stack<T>::push(T const &value)
 	
 		array_ = array_new;
 		array_size_ = size;
-
 		
 	}
+	
 		array_[++count_] = value;
 };
 
