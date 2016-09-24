@@ -21,7 +21,7 @@ SCENARIO("Stack push", "[push]"){
 	bool mark=false;
 	stack<int> st;
 	st.push(1);
-	if ((st.count()==1)&&(st.pop()==1))
+	if ((st.count()==1)&&(st.top()==1))
 	{
 		mark=true;
 	}
@@ -59,7 +59,7 @@ SCENARIO("Assign", "[assign]"){
 	st.push(10);
 	stack<int> st_;
 	st_=st;
-	if ((st_.count()==1)&(st_.pop()==10))
+	if ((st_.count()==1)&(st_.top()==10))
 	{
 		mark=true;
 	}
@@ -71,7 +71,7 @@ SCENARIO("Copy","[copy]"){
 	stack<int> st;
 	st.push(10);
 	stack<int> st_=st;
-	if ((st_.count()==1)&(st_.pop()==10))
+	if ((st_.count()==1)&(st_.top()==10))
 	{
 		mark=true;
 	}
