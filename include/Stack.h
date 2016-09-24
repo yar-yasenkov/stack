@@ -7,13 +7,13 @@ template <typename T>
 class stack
 {
 public:
-	stack();
-	stack(const stack &);
-	~stack();	
-	stack & operator=(const stack &);
-	size_t count() const;
-	void push(T const &);
-	T pop();
+	stack();/*noexcept*/
+	stack(const stack &);/*noexcept*/
+	~stack();/*noexcept*/	
+	stack & operator=(const stack &);/*strong*/
+	size_t count() const;/*noexcept*/
+	void push(T const &);/*strong*/
+	T pop();/*basic*/
 private:
 	T * array_;
 	size_t array_size_;
@@ -21,32 +21,39 @@ private:
 };
 
 template <typename T>
-auto new_copy(const T * source,  size_t new_size,size_t current_size) -> T*
+auto new_copy(const T * source,  size_t new_size,size_t current_size) -> T*/*strong*/
 {
         T * new_array = new T[new_size];
-	std::copy(source, source + current_size, new_array);
+	try
+	{
+		std::copy(source, source + current_size, new_array);
+	}
+	catch(...)
+	{
+		delete []new_array;
+		throw;
+	}
 	return new_array;
 };
 
 
-template <typename T>
+template <typename T>/*noexcept*/
 stack<T>::stack() : array_size_(0), count_(0), array_(nullptr)
 {};
 
-template <typename T>
+template <typename T>/*noexcept*/
 stack<T>::stack(const stack & obj):count_(obj.count_),array_size_(obj.array_size_),array_(new_copy(obj.array_,obj.array_size_,obj.count_))
 {};
 
 template <typename T>
-stack<T>::~stack()
+stack<T>::~stack()/*noexcept*/
 {
 	delete[] array_;
 };
 
 template <typename T>
-stack<T> & stack<T>::operator=(const stack & st)
+stack<T> & stack<T>::operator=(const stack & st)/*strong*/
 {
-	std::cout << "=operator" << std::endl;
 	if (this != &st)
 	{
 		delete[] array_;
@@ -58,17 +65,17 @@ stack<T> & stack<T>::operator=(const stack & st)
 }
 
 template <typename T>
-size_t  stack<T>::count() const
+size_t  stack<T>::count() const/*noexcept*/
 {
 	return count_;
 };
 
 template <typename T>
-void stack<T>::push(T const &value)
+void stack<T>::push(T const &value)/*strong*/
 {
 	if (array_size_ == count_)
 	{
-	    int size=array_size_*2+(array_size_ == 0);
+	        int size=array_size_*2+(array_size_ == 0);
 		T * array_new=new_copy(array_,size,count_);
 		delete[] array_;
 		array_ = array_new;
@@ -79,7 +86,7 @@ void stack<T>::push(T const &value)
 };
 
 template <typename T>
-T stack<T>::pop()
+T stack<T>::pop()/*basic*/
 {
 	if (count_ == 0)
 	{
