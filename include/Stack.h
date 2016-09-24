@@ -13,7 +13,8 @@ public:
 	stack & operator=(const stack &);/*strong*/
 	size_t count() const;/*noexcept*/
 	void push(T const &);/*strong*/
-	T pop();/*basic*/
+	void pop();/*strong*/
+	T& top();/*strong*/
 private:
 	T * array_;
 	size_t array_size_;
@@ -86,12 +87,21 @@ void stack<T>::push(T const &value)/*strong*/
 };
 
 template <typename T>
-T stack<T>::pop()/*basic*/
+void stack<T>::pop()/*strong*/
 {
 	if (count_ == 0)
 	{
 		throw "out of stack";
 	}
-	return array_[--count_];
+	--count_;
 };
+
+T &stack<T>::top()/*strong*/
+{
+	if (count_ == 0)
+	{
+		throw "out of stack";
+	}
+	return array_[count_-1];	
+}
 
