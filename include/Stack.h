@@ -96,6 +96,7 @@ void stack<T>::pop()/*strong*/
 	--count_;
 };
 
+template <typename T>
 T &stack<T>::top()/*strong*/
 {
 	if (count_ == 0)
