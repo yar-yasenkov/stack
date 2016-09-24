@@ -32,7 +32,21 @@ SCENARIO("Stack pop", "[pop]"){
 	bool mark=false;
 	stack<int> st;
 	st.push(123);
-	if (st.pop()==123)
+	st.pop();
+	if (st.count()==0)
+	{
+		mark=true;
+	}
+	REQUIRE(mark);
+}
+
+SCENARIO("Stack top", "[top]"){
+	bool mark=false;
+	stack<int> st;
+	st.push(11);
+	st.push(22);
+	int v=st.top();
+	if (v==22)
 	{
 		mark=true;
 	}
