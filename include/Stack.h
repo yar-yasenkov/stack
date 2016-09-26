@@ -8,7 +8,7 @@ class stack
 {
 public:
 	stack();/*noexcept*/
-	stack(const stack &);/*noexcept*/
+	stack(const stack &);/*strong*/
 	~stack();/*noexcept*/	
 	stack & operator=(const stack &);/*strong*/
 	size_t count() const;/*noexcept*/
@@ -42,7 +42,7 @@ template <typename T>/*noexcept*/
 stack<T>::stack() : array_size_(0), count_(0), array_(nullptr)
 {};
 
-template <typename T>/*noexcept*/
+template <typename T>/*strong*/
 stack<T>::stack(const stack & obj):count_(obj.count_),array_size_(obj.array_size_),array_(new_copy(obj.array_,obj.array_size_,obj.count_))
 {};
 
