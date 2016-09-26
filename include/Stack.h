@@ -57,10 +57,11 @@ stack<T> & stack<T>::operator=(const stack & st)/*strong*/
 {
 	if (this != &st)
 	{
+		T *pnew=new_copy(st.array_,st.array_size_,st.count_);
 		delete[] array_;
 		array_size_ = st.array_size_;
 		count_ = st.count_;
-		array_=new_copy(st.array_,st.array_size_,st.count_);
+		array_=pnew;
 	}
 	return *this;
 }
