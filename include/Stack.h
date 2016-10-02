@@ -111,6 +111,6 @@ T &stack<T>::top()/*strong*/
 template <typename T>/*noexcept*/
 bool stack<T>::empty() const
 {
-	return(count_ == 0)
+	return(count_ == 0);
 }
 
