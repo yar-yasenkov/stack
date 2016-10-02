@@ -59,7 +59,7 @@ SCENARIO("Assign", "[assign]"){
 	st.push(10);
 	stack<int> st_;
 	st_=st;
-	if ((st_.count()==1)&(st_.top()==10))
+	if ((st_.count()==1) && (st_.top()==10))
 	{
 		mark=true;
 	}
@@ -71,7 +71,21 @@ SCENARIO("Copy","[copy]"){
 	stack<int> st;
 	st.push(10);
 	stack<int> st_=st;
-	if ((st_.count()==1)&(st_.top()==10))
+	if ((st_.count()==1) && (st_.top()==10))
+	{
+		mark=true;
+	}
+	REQUIRE(mark);
+}
+
+SCENARIO("Empty","[empty]"){
+	bool mark=false;
+	bool mark_empty,mark_full;
+	stack<int> st;
+	mark_empty=st.empty();
+	st.push(10);
+	mark_full=st.empty();
+	if ((mark_empty==true) && (mark_full==false))
 	{
 		mark=true;
 	}
