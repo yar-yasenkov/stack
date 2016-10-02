@@ -15,6 +15,7 @@ public:
 	void push(T const &);/*strong*/
 	void pop();/*strong*/
 	T& top();/*strong*/
+	bool empty();/*noexcept*/ const;
 private:
 	T * array_;
 	size_t array_size_;
@@ -105,5 +106,11 @@ T &stack<T>::top()/*strong*/
 		throw "out of stack";
 	}
 	return array_[count_-1];	
+}
+
+template <typename T>
+bool stack<T>::empty() const
+{
+	return(count_ == 0)
 }
 
