@@ -108,7 +108,7 @@ T &stack<T>::top()/*strong*/
 	return array_[count_-1];	
 }
 
-template <typename T>
+template <typename T>/*noexcept*/
 bool stack<T>::empty() const
 {
 	return(count_ == 0)
