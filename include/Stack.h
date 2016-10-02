@@ -15,7 +15,7 @@ public:
 	void push(T const &);/*strong*/
 	void pop();/*strong*/
 	T& top();/*strong*/
-	bool empty();/*noexcept*/ const;
+	bool empty() const;/*noexcept*/
 private:
 	T * array_;
 	size_t array_size_;
