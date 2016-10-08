@@ -86,7 +86,7 @@ stack<T>::stack() : allocator<T>()
 template <typename T>/*strong*/
 stack<T>::stack(const stack & obj):allocator<T>(obj.count_)
 {
-	allocator<T>::size_ = obj.size;
+	allocator<T>::size_ = obj.size_;
 	allocator<T>::ptr_ = new_copy(obj.ptr_,obj.size_,obj.count_);
 
 };
