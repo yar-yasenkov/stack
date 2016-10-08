@@ -90,7 +90,6 @@ stack<T>::stack(const stack & obj):allocator<T>(obj.count_),allocator<T>::size_(
 template <typename T>
 stack<T>::~stack()/*noexcept*/
 {
-	delete[] array_;
 };
 
 template <typename T>
