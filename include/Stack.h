@@ -29,7 +29,7 @@ allocator<T>::allocator(size_t size):count_(size)
 	{
 		ptr_ = static_cast<T*>(operator new(size*sizeof(T)));
 	}
-	size(0);
+	size = 0;
 }
 
 template<typename T> /*noexcept*/
