@@ -19,7 +19,7 @@ protected:
 };
 
 template <typename T>
-allocator<T>::allocator(size_t size):size_(size),count_(0)
+allocator<T>::allocator(size_t size):count_(size)
 {
 	if (size==0)
 	{
@@ -29,6 +29,7 @@ allocator<T>::allocator(size_t size):size_(size),count_(0)
 	{
 		ptr_ = static_cast<T*>(operator new(size*sizeof(T)));
 	}
+	size(0);
 }
 
 template<typename T> /*noexcept*/
