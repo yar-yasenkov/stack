@@ -27,7 +27,7 @@ allocator<T>::allocator(size_t size):size_(size),count_(0)
 	}
 	else
 	{
-		ptr_ = static cast<T*>(operator new(size*sizeof(T)));
+		ptr_ = static_cast<T*>(operator new(size*sizeof(T)));
 	}
 }
 
