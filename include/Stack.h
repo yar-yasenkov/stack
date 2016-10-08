@@ -18,6 +18,7 @@ protected:
     size_t count_;
 };
 
+template <typename T>
 allocator<T>::allocator(size_t size):size_(size),count_(0)
 {
 	if (size==0)
