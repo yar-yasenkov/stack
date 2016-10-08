@@ -84,8 +84,12 @@ stack<T>::stack() : allocator<T>()
 {};
 
 template <typename T>/*strong*/
-stack<T>::stack(const stack & obj):allocator<T>(obj.count_),allocator<T>::size_(obj.size_),allocator<T>::ptr_(new_copy(obj.ptr_,obj.size_,obj.count_))
-{};
+stack<T>::stack(const stack & obj):allocator<T>(obj.count_)
+{
+	allocator<T>::size_ = obj.size;
+	allocator<T>::ptr_ = new_copy(obj.ptr_,obj.size_,obj.count_);
+
+};
 
 template <typename T>
 stack<T>::~stack()/*noexcept*/
@@ -97,7 +101,7 @@ stack<T> & stack<T>::operator=(const stack & st)/*strong*/
 {
 	if (this != &st)
 	{
-		st.swap(*this);
+		(stack(st)).swap(*this);
 	}
 	return *this;
 }
