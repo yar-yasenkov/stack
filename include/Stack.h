@@ -10,7 +10,7 @@ protected:
     ~allocator();
     auto swap(allocator & other) -> void;
     auto construct(T*ptr,T const & val) -> void;
-    auto destroy(T *ptr)->void;auto destroy(T *first, T *last) -> void;
+    auto destroy(T *ptr) -> void;
     auto destroy(T *first, T *last) -> void;
     
     allocator(allocator const &) = delete;
