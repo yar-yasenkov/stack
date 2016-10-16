@@ -44,21 +44,18 @@ allocator<T>::~allocator() {
 template <typename T>
 void allocator<T>::construct(T *ptr,T const & val)
 {
-	std::cout << "DebugAllocator::construct " << std::endl;
 	new(ptr) T(val);
 }
 
 template <typename T>
 void allocator<T>::destroy(T *ptr)
 {
-	std::cout << "DebugAllocator::destroy " << std::endl;
 	ptr->~T();
 }
 
 template <typename T>
 void allocator<T>::destroy(T *first,T *last)
 {
-	std::cout << "DebugAllocator::destroy first-last " << std::endl;
 	for (; first != last; first++)
 	{
 		destroy(first);
