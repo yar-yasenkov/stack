@@ -9,6 +9,9 @@ protected:
     allocator(size_t size = 0);
     ~allocator();
     auto swap(allocator & other) -> void;
+    auto construct(T*ptr,T const & val) -> void;
+    auto destroy(T *ptr)->void;auto destroy(T *first, T *last) -> void;
+    auto destroy(T *first, T *last) -> void;
     
     allocator(allocator const &) = delete;
     auto operator =(allocator const &) -> allocator & = delete;
@@ -19,7 +22,7 @@ protected:
 };
 
 template <typename T>
-allocator<T>::allocator(size_t size):count_(size)
+allocator<T>::allocator(size_t size):count_(0), size_(size)
 {
 	if (size==0)
 	{
@@ -29,12 +32,37 @@ allocator<T>::allocator(size_t size):count_(size)
 	{
 		ptr_ = static_cast<T*>(operator new(size*sizeof(T)));
 	}
-	size = 0;
+	
 }
 
 template<typename T> /*noexcept*/
 allocator<T>::~allocator() {
-	delete ptr_;
+	destroy(ptr_, ptr_ + size_);
+	operator delete(ptr_);
+}
+
+template <typename T>
+void allocator<T>::construct(T *ptr,T const & val)
+{
+	std::cout << "DebugAllocator::construct " << std::endl;
+	new(ptr) T(val);
+}
+
+template <typename T>
+void allocator<T>::destroy(T *ptr)
+{
+	std::cout << "DebugAllocator::destroy " << std::endl;
+	ptr->~T();
+}
+
+template <typename T>
+void allocator<T>::destroy(T *first,T *last)
+{
+	std::cout << "DebugAllocator::destroy first-last " << std::endl;
+	for (; first != last; first++)
+	{
+		destroy(first);
+	}
 }
 	
 template<typename T> /*noexcept*/
@@ -45,7 +73,7 @@ auto allocator<T>::swap(allocator & other) -> void {
 }
 
 template <typename T>
-class stack : protected allocator<T>
+class stack : private allocator<T>
 {
 public:
 	stack();/*noexcept*/
@@ -81,11 +109,12 @@ stack<T>::stack() : allocator<T>()
 {};
 
 template <typename T>/*strong*/
-stack<T>::stack(const stack & obj):allocator<T>(obj.count_)
+stack<T>::stack(const stack & obj):allocator<T>(obj.size_)
 {
-	allocator<T>::size_ = obj.size_;
-	allocator<T>::ptr_ = new_copy(obj.ptr_,obj.size_,obj.count_);
-
+	for (size_t i = 0; i < obj.count_; i++) {
+		construct(allocator<T>::ptr_ + i, obj.ptr_[i]);
+	}
+	allocator<T>::count_ = obj.count_;
 };
 
 template <typename T>
