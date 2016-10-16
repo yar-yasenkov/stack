@@ -112,7 +112,7 @@ template <typename T>/*strong*/
 stack<T>::stack(const stack & obj):allocator<T>(obj.size_)
 {
 	for (size_t i = 0; i < obj.count_; i++) {
-		construct(allocator<T>::ptr_ + i, obj.ptr_[i]);
+		allocator<T>::construct(allocator<T>::ptr_ + i, obj.ptr_[i]);
 	}
 	allocator<T>::count_ = obj.count_;
 };
