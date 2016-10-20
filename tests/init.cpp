@@ -1,4 +1,4 @@
-#include "stack.hpp"
+#include "Stack.h"
 #include <catch.hpp>
 
 SCENARIO("push") {
