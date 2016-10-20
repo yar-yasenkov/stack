@@ -73,7 +73,7 @@ template <typename T>
 class stack : private allocator<T>
 {
 public:
-	stack();/*noexcept*/
+	stack(size_t size=0);/*noexcept*/
 	stack(const stack &);/*strong*/
 	~stack();/*noexcept*/	
 	stack & operator=(const stack &);/*strong*/
@@ -102,7 +102,7 @@ auto new_copy(const T * source,  size_t new_size,size_t current_size) -> T*/*str
 
 
 template <typename T>/*noexcept*/
-stack<T>::stack() : allocator<T>()
+stack<T>::stack(size_t size) : allocator<T>(size)
 {};
 
 template <typename T>/*strong*/
@@ -138,16 +138,19 @@ size_t  stack<T>::count() const/*noexcept*/
 template <typename T>
 void stack<T>::push(T const &value)/*strong*/
 {
-	if (allocator<T>::size_ == allocator<T>::count_)
+	if (this->size_ == this->count_)
 	{
-	        int size=allocator<T>::size_*2+(allocator<T>::size_ == 0);
-		T * array_new=new_copy(allocator<T>::ptr_,size,allocator<T>::count_);
-		delete[] allocator<T>::ptr_;
-		allocator<T>::ptr_ = array_new;
-		allocator<T>::size_=size;
+		size_t size = this->size_ * 2 + (this->size_ == 0);
+		stack temp{ size };
+		while (temp.count() < this->count_) {
+			temp.push(this->ptr_[temp.count()]);
+		}
+
+		this->swap(temp);
 	}
-		allocator<T>::ptr_[allocator<T>::count_] = value;
-		++allocator<T>::count_;
+
+	construct(this->ptr_ + this->count_, value);
+	++this->count_;
 };
 
 template <typename T>
