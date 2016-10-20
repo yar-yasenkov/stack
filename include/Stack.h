@@ -150,7 +150,7 @@ void stack<T>::push(T const &value)/*strong*/
 		this->swap(temp);
 	}
 
-	construct(this->ptr_ + this->count_, value);
+	this->construct(this->ptr_ + this->count_, value);
 	++this->count_;
 };
 
