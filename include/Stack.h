@@ -162,7 +162,7 @@ void stack<T>::pop()/*strong*/
 		throw "out of stack";
 	}
 	--allocator<T>::count_;
-	allocator<T>::destroy(allocator<T>::ptr_[allocator<T>::count_]);
+	allocator<T>::destroy(&allocator<T>::ptr_[allocator<T>::count_]);
 };
 
 template <typename T>
