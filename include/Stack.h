@@ -117,7 +117,7 @@ stack<T>::stack(const stack & obj):allocator<T>(obj.size_)
 template <typename T>
 stack<T>::~stack()/*noexcept*/
 {
-	destroy(this->ptr_, this->ptr_ + this->size_);
+	allocator<T>::destroy(this->ptr_, this->ptr_ + this->size_);
 };
 
 template <typename T>
@@ -162,6 +162,7 @@ void stack<T>::pop()/*strong*/
 		throw "out of stack";
 	}
 	--allocator<T>::count_;
+	allocator<T>::destroy(this->ptr_[this->count_]);
 };
 
 template <typename T>
