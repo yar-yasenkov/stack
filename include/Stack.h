@@ -38,7 +38,6 @@ allocator<T>::allocator(size_t size):count_(0), size_(size)
 
 template<typename T> /*noexcept*/
 allocator<T>::~allocator() {
-	destroy(ptr_, ptr_ + size_);
 	operator delete(ptr_);
 }
 
@@ -118,6 +117,7 @@ stack<T>::stack(const stack & obj):allocator<T>(obj.size_)
 template <typename T>
 stack<T>::~stack()/*noexcept*/
 {
+	destroy(this->ptr_, this->ptr_ + this->size_);
 };
 
 template <typename T>
