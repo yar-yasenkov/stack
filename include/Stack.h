@@ -38,6 +38,7 @@ allocator<T>::allocator(size_t size):count_(0), size_(size)
 
 template<typename T> /*noexcept*/
 allocator<T>::~allocator() {
+	allocator<T>::destroy(this->ptr_, this->ptr_ + this->count_);
 	operator delete(ptr_);
 }
 
