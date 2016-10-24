@@ -117,7 +117,7 @@ stack<T>::stack(const stack & obj):allocator<T>(obj.size_)
 template <typename T>
 stack<T>::~stack()/*noexcept*/
 {
-	allocator<T>::destroy(this->ptr_, this->ptr_ + this->size_);
+	allocator<T>::destroy(this->ptr_, this->ptr_ + this->count_);
 };
 
 template <typename T>
