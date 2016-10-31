@@ -191,7 +191,7 @@ auto allocator<T>::swap(allocator & other) -> void {
 }
 
 template <typename T>
-class stack : private allocator<T>
+class stack :
 {
 public:
 	explicit
@@ -295,5 +295,5 @@ auto stack<T>::empty()const->bool
 template<typename T>
 auto stack<T>::throw_is_empty()const->void
 {
-	std::cout << "EMPTY" << std::endl; 
+	throw std::logic_error(); 
 }
