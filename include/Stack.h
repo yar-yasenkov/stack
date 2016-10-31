@@ -91,11 +91,10 @@ public:
 	auto count() const /*noexcept*/ -> size_t;
 	auto full() const /*noexcept*/ -> bool;
 	auto empty() const /*noexcept*/ -> bool;
+	auto swap(allocator & other) /*noexcept*/ -> void;
 private:
 	auto destroy(T * first, T * last) /*noexcept*/ -> void;
-	auto swap(allocator & other) /*noexcept*/ -> void;
-
-
+	
 	T * ptr_;
 	size_t size_;
 	std::unique_ptr<bitset> map_;
@@ -242,8 +241,7 @@ auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
 {
 	if (this != &st)
 	{
-		for(size_t i = 0; i < st.count(); i++) 
-			this->push(*(st.allocator_.get() + i));
+		(stack(st)).swap(*this);
 	}
 	return *this;
 };
