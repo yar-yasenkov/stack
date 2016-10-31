@@ -1,6 +1,3 @@
-#ifndef stack_cpp
-#define stack_cpp
-#pragma once
 #include <cstring>
 #include <iostream>
 #include <memory>
@@ -115,7 +112,7 @@ allocator<T>::~allocator() {
 }
 
 template <typename T>
-void allocator<T>::construct(T *ptr,T const & val)
+auto allocator<T>::construct(T *ptr,T const & val) ->void
 {
 	if (ptr >= ptr_&&ptr < ptr_ + size_&&map_->test(ptr - ptr_)){
 		new(ptr)T(val);
@@ -125,7 +122,7 @@ void allocator<T>::construct(T *ptr,T const & val)
 }
 
 template <typename T>
-void allocator<T>::destroy(T *ptr)
+auto allocator<T>::destroy(T *ptr)-> void
 {
 	ptr->~T();
 	map_->reset(ptr - ptr_);
@@ -141,6 +138,18 @@ auto allocator<T>::resize()->void
 }
 
 template<typename T>
+auto allocator<T>::get()-> T* 
+{ 
+	return ptr_; 
+}
+
+template<typename T>
+auto allocator<T>::get() const -> T const * 
+{ 
+	return ptr_; 
+}
+
+template<typename T>
 allocator<T>::allocator(allocator const& other) : ptr_((T*)(operator new(other.size_))), size_(other.size_), map_(std::make_unique<bitset>(size_))
 {
 	for (size_t i = 0; i < size_-1; i++) 
@@ -148,7 +157,7 @@ allocator<T>::allocator(allocator const& other) : ptr_((T*)(operator new(other.s
 }
 
 template <typename T>
-void allocator<T>::destroy(T *first,T *last)
+auto allocator<T>::destroy(T *first,T *last)-> void
 {
 	for (; first != last; first++)
 	{
@@ -268,5 +277,3 @@ auto stack<T>::throw_is_empty()const->void
 {
 	std::cout << "EMPTY" << std::endl; 
 }
-
-#endif
