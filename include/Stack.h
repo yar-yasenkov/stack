@@ -255,7 +255,7 @@ auto stack<T>::top()const->T const &
 }
 
 template <typename T>/*noexcept*/
-auto stack<T>::empty()->bool const
+auto stack<T>::empty()const->bool 
 {
 	return(allocator_.empty() == 0);
 }
