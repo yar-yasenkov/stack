@@ -301,5 +301,5 @@ auto stack<T>::empty()const->bool
 template<typename T>
 auto stack<T>::throw_is_empty()const->void
 {
-	throw logic_error(); 
+	throw std::logic_error(); 
 }
