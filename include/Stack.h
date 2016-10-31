@@ -255,7 +255,7 @@ auto stack<T>::top()const->T const &
 }
 
 template <typename T>/*noexcept*/
-bool stack<T>::empty() const
+auto stack<T>::empty()->bool const
 {
 	return(allocator_.empty() == 0);
 }
@@ -264,11 +264,5 @@ template<typename T>
 auto stack<T>::throw_is_empty()const->void
 {
 	std::cout << "EMPTY" << std::endl; 
-}
-
-template <typename T>/*noexcept*/
-bool stack<T>::empty() const
-{
-	return(allocator<T>::count_ == 0);
 }
 
