@@ -237,7 +237,7 @@ stack<T>::stack(size_t size) : allocator_(size)
 {};
 
 template <typename T>
-stack<T>::stack(stack const & other)
+stack<T>::stack(stack const & obj)
 {
 	allocator_.map = obj.allocator_.map_;
 	for (size_t i = 0; i < obj.count(); i++) 
