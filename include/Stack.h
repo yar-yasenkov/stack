@@ -104,11 +104,12 @@ template <typename T>
 allocator<T>::allocator(size_t size) : ptr_((T*)operator new(size)), size_(size), map_(std::make_unique<bitset>(size))
 {}
 
-//template<typename T> /*noexcept*/
-//allocator<T>::~allocator() {
-	//allocator<T>::destroy(this->ptr_, this->ptr_ + this->count_);
-	//operator delete(ptr_);
-//}
+template<typename T> /*noexcept*/
+allocator<T>::~allocator() {
+	if (this->
+	allocator<T>::destroy(this->ptr_, this->ptr_ + this->count_);
+	operator delete(ptr_);
+}
 
 template <typename T>
 auto allocator<T>::construct(T *ptr,T const & val) ->void
@@ -298,5 +299,5 @@ auto stack<T>::empty()const->bool
 template<typename T>
 auto stack<T>::throw_is_empty()const->void
 {
-	throw std::logic_error(); 
+	throw logic_error(); 
 }
