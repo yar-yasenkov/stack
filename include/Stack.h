@@ -111,6 +111,7 @@ allocator<T>::~allocator() {
 	    allocator<T>::destroy(ptr_, ptr_ + size_);
 	    operator delete(ptr_);
 	}
+	
 }
 
 template <typename T>
@@ -126,11 +127,11 @@ auto allocator<T>::construct(T *ptr,T const & val) ->void
 template <typename T>
 auto allocator<T>::destroy(T *ptr)-> void
 {
-	if (!map_->test(ptr-ptr_))
-	{
-	   ptr->~T();
-	   map_->reset(ptr - ptr_);
-	}
+	if (map_->test(ptr-ptr_))
+	throw std::logic_error("error");
+	ptr->~T();
+	map_->reset(ptr - ptr_);
+		
 }
 
 template<typename T>
@@ -155,7 +156,7 @@ auto allocator<T>::get() const -> T const *
 }
 
 template<typename T>
-allocator<T>::allocator(allocator const& other) :allocator<T>(other.size)
+allocator<T>::allocator(allocator const& other) :allocator<T>(other.size_)
 {
 	for (size_t i = 0; i < other.count(); i++) 
 		construct(ptr_ + i, other.ptr_[i]);
@@ -164,11 +165,13 @@ allocator<T>::allocator(allocator const& other) :allocator<T>(other.size)
 template <typename T>
 auto allocator<T>::destroy(T *first,T *last)-> void
 {
-	if((first >= ptr_) && (last<=ptr_+this->size_))
+	if(first>last)
+	throw std::logic_error("errror");
 	for (; first != last; first++)
 	{
 		destroy(first);
 	}
+	
 }
 
 template<typename T>
