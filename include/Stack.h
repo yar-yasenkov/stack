@@ -164,6 +164,25 @@ auto allocator<T>::destroy(T *first,T *last)-> void
 		destroy(first);
 	}
 }
+
+template<typename T>
+auto allocator<T>::count() const -> size_t
+{ 
+	return map_->counter(); 
+}
+
+template<typename T>
+auto allocator<T>::full() const -> bool 
+{
+	return (map_->counter() == size_); 
+}
+
+template<typename T>
+auto allocator<T>::empty() const -> bool 
+{ 
+	return (map_->counter() == 0); 
+}
+
 	
 template<typename T> /*noexcept*/
 auto allocator<T>::swap(allocator & other) -> void {
