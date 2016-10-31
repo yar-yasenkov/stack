@@ -1,3 +1,6 @@
+#ifndef stack_cpp
+#define stack_cpp
+#pragma once
 #include <cstring>
 #include <iostream>
 #include <memory>
@@ -266,3 +269,4 @@ auto stack<T>::throw_is_empty()const->void
 	std::cout << "EMPTY" << std::endl; 
 }
 
+#endif
