@@ -242,7 +242,7 @@ stack<T>::stack(stack const & obj)
 	allocator_.map = obj.allocator_.map_;
 	for (size_t i = 0; i < obj.count(); i++) 
 	{
-		allocator_.construct(allocator_.ptr_[i], obj.allocator_.ptr[i]);
+		allocator_.construct(allocator_.ptr_[i], obj.allocator_.ptr_[i]);
 	}
 }
 
