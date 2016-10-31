@@ -243,7 +243,7 @@ auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
 	{
 		(allocator<T>(st.allocator_)).swap(this->allocator_);
 	}
-	return this;
+	return *this;
 };
 
 template <typename T>
