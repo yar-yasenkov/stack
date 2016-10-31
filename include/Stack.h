@@ -164,6 +164,7 @@ allocator<T>::allocator(allocator const& other) :allocator<T>(other.size)
 template <typename T>
 auto allocator<T>::destroy(T *first,T *last)-> void
 {
+	if((first >= ptr_) && (last<=ptr_+this->size_))
 	for (; first != last; first++)
 	{
 		destroy(first);
@@ -301,5 +302,5 @@ auto stack<T>::empty()const->bool
 template<typename T>
 auto stack<T>::throw_is_empty()const->void
 {
-	throw std::logic_error(); 
+	throw std::logic_error("ERROR"); 
 }
