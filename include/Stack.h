@@ -78,7 +78,7 @@ public:
 	allocator(std::size_t size = 0) /*strong*/;
 	allocator(allocator const & other) /*strong*/;
 	auto operator =(allocator const & other)->allocator & = delete;
-	
+	~allocator();
 
 	auto resize() /*strong*/ -> void;
 
@@ -106,9 +106,11 @@ allocator<T>::allocator(size_t size) : ptr_((T*)operator new(size)), size_(size)
 
 template<typename T> /*noexcept*/
 allocator<T>::~allocator() {
-	if (this->
-	allocator<T>::destroy(this->ptr_, this->ptr_ + this->count_);
-	operator delete(ptr_);
+	if (this->count() > 0)
+	{
+	    allocator<T>::destroy(ptr_, ptr_ + size_);
+	    operator delete(ptr_);
+	}
 }
 
 template <typename T>
