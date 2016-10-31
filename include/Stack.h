@@ -152,7 +152,7 @@ auto allocator<T>::get() const -> T const *
 template<typename T>
 allocator<T>::allocator(allocator const& other) : ptr_((T*)(operator new(other.size_))), size_(other.size_), map_(std::make_unique<bitset>(size_))
 {
-	for (size_t i = 0; i < size_-1; i++) 
+	for (size_t i = 0; i < other.count(); i++) 
 		construct(ptr_ + i, other.ptr_[i]);
 }
 
