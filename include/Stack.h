@@ -241,7 +241,7 @@ auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
 {
 	if (this != &st)
 	{
-		(st.allocator_).swap(this->allocator_);
+		(allocator<T>(st.allocator_)).swap(this->allocator_);
 	}
 	return this;
 };
