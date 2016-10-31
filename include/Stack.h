@@ -197,7 +197,6 @@ class stack : private allocator<T>
 public:
 	explicit
 	stack(size_t size = 0);
-	stack(stack const & ither);
 	auto operator =(stack const & other) /*strong*/ -> stack &;
 	
 
@@ -236,15 +235,7 @@ template <typename T>/*noexcept*/
 stack<T>::stack(size_t size) : allocator_(size)
 {};
 
-template <typename T>
-stack<T>::stack(stack const & obj)
-{
-	allocator_.map = obj.allocator_.map_;
-	for (size_t i = 0; i < obj.count(); i++) 
-	{
-		allocator_.construct(allocator_.ptr_[i], obj.allocator_.ptr_[i]);
-	}
-}
+
 
 template <typename T>
 auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
