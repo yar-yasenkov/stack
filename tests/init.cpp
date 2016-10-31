@@ -1,6 +1,6 @@
 #include "Stack.h"
 #include <catch.hpp>
-
+using namespace std;
 SCENARIO("Stack count", "[count]"){
 	bool mark=false;
 	stack<int> st;
