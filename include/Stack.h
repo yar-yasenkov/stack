@@ -83,7 +83,7 @@ public:
 	auto resize() /*strong*/ -> void;
 
 	auto construct(T * ptr, T const & value) /*strong*/ -> void;
-	auto destroy(T * ptr) /*noexcept*/ -> void;
+	auto destroy(T * ptr) /*strong*/ -> void;
 
 	auto get() /*noexcept*/ -> T *;
 	auto get() const /*noexcept*/ -> T const *;
@@ -113,7 +113,7 @@ allocator<T>::allocator(size_t size) : ptr_((T*)operator new(size)), size_(size)
 template <typename T>
 auto allocator<T>::construct(T *ptr,T const & val) ->void
 {
-	if (ptr >= ptr_&&ptr < ptr_ + size_&&map_->test(ptr - ptr_)){
+	if (ptr >= ptr_ && ptr < ptr_ + size_ && map_->test(ptr - ptr_)){
 		new(ptr)T(val);
 		map_->set(ptr - ptr_);
 	}
@@ -123,8 +123,11 @@ auto allocator<T>::construct(T *ptr,T const & val) ->void
 template <typename T>
 auto allocator<T>::destroy(T *ptr)-> void
 {
-	ptr->~T();
-	map_->reset(ptr - ptr_);
+	if (map_->test(ptr-ptr_))
+	{
+	   ptr->~T();
+	   map_->reset(ptr - ptr_);
+	}
 }
 
 template<typename T>
@@ -149,7 +152,7 @@ auto allocator<T>::get() const -> T const *
 }
 
 template<typename T>
-allocator<T>::allocator(allocator const& other) : ptr_((T*)(operator new(other.size_))), size_(other.size_), map_(std::make_unique<bitset>(size_))
+allocator<T>::allocator(allocator const& other) :allocator<T>(other.size)
 {
 	for (size_t i = 0; i < other.count(); i++) 
 		construct(ptr_ + i, other.ptr_[i]);
@@ -191,7 +194,7 @@ auto allocator<T>::swap(allocator & other) -> void {
 }
 
 template <typename T>
-class stack :
+class stack
 {
 public:
 	explicit
