@@ -32,7 +32,7 @@ bitset::bitset(size_t size) : ptr_(std::make_unique<bool[]>(size)), size_(size),
 
 auto bitset::set(size_t index)->void 
 { 
-	if (index >= 0 && index < size_)
+	if (index < size_)
 	{ 
 		ptr_[index] = true; 
 		++counter_; 
@@ -43,7 +43,7 @@ auto bitset::set(size_t index)->void
 
 auto bitset::reset(size_t index)->void 
 { 
-	if (index >= 0 && index < size_) 
+	if (index < size_) 
 	{ 
 		ptr_[index] = false; 
 		--counter_; 
@@ -53,7 +53,7 @@ auto bitset::reset(size_t index)->void
 
 auto bitset::test(size_t index)->bool 
 { 
-	if (index >= 0 && index < size_) 
+	if (index < size_) 
 		return !ptr_[index]; 
 	else throw("out os bitset"); 
 }
