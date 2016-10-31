@@ -93,7 +93,7 @@ public:
 	auto empty() const /*noexcept*/ -> bool;
 	auto swap(allocator & other) /*noexcept*/ -> void;
 private:
-	auto destroy(T * first, T * last) /*noexcept*/ -> void;
+	auto destroy(T * first, T * last) /*strong*/ -> void;
 	
 	T * ptr_;
 	size_t size_;
@@ -138,7 +138,7 @@ template<typename T>
 auto allocator<T>::resize()->void
 {
 	allocator<T> all(size_ * 2 + (size_ == 0));
-	for (size_t i = 0; i < size_; i++) 
+	for (size_t i = 0; i < size_; ++i) 
 		all.construct(all.get() + i, ptr_[i]);
 	this->swap(all);
 }
@@ -158,7 +158,7 @@ auto allocator<T>::get() const -> T const *
 template<typename T>
 allocator<T>::allocator(allocator const& other) :allocator<T>(other.size_)
 {
-	for (size_t i = 0; i < other.count(); i++) 
+	for (size_t i = 0; i < other.count(); ++i) 
 		construct(ptr_ + i, other.ptr_[i]);
 }
 
@@ -167,7 +167,7 @@ auto allocator<T>::destroy(T *first,T *last)-> void
 {
 	if(first>last)
 	throw std::logic_error("errror");
-	for (; first != last; first++)
+	for (; first != last; ++first)
 	{
 		destroy(first);
 	}
@@ -220,7 +220,7 @@ public:
 private:
 	allocator<T> allocator_;
 
-	auto throw_is_empty() const -> void;
+	auto throw_is_empty()/*strong*/ const -> void;
 };
 
 //template <typename T>
