@@ -94,3 +94,21 @@ SCENARIO("Empty","[empty]"){
 	}
 	REQUIRE(mark);
 }
+
+SCENARIO("threads","[TH]"){
+	stack<int> st;
+	st.push(1);
+	st.push(2);
+	st.push(3);
+	std::thread t1([&st](){
+		st.push(4);
+		st.push(5);
+	});
+	std::thread t2([&st](){
+		st.pop();
+		st.pop();
+	});
+	t1.join();
+	t2.join();
+	REQUIRE(st.count()==3);
+}
