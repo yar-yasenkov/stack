@@ -66,7 +66,7 @@ SCENARIO("Assign", "[assign]"){
 	}
 	REQUIRE(mark);
 }
-/*
+
 SCENARIO("Copy","[copy]"){
 	bool mark=false;
 	stack<int> st;
@@ -79,7 +79,7 @@ SCENARIO("Copy","[copy]"){
 		mark=true;
 	}
 	REQUIRE(mark);
-}*/
+}
 
 SCENARIO("Empty","[empty]"){
 	bool mark=false;
