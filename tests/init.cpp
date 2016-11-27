@@ -67,19 +67,6 @@ SCENARIO("Assign", "[assign]"){
 	REQUIRE(mark);
 }
 
-SCENARIO("Copy","[copy]"){
-	bool mark=false;
-	stack<int> st;
-	st.push(10);
-	stack<int> st_=st;
-	std::cout << "st_.count_=" << st_.count() << std::endl;
-	std::cout << "st_.top=" << st_.top() << std::endl;
-	if ((st_.count()==1) && (st_.top()==10))
-	{
-		mark=true;
-	}
-	REQUIRE(mark);
-}
 
 SCENARIO("Empty","[empty]"){
 	bool mark=false;
