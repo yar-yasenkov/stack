@@ -267,23 +267,23 @@ size_t  stack<T>::count() const/*noexcept*/
 template <typename T>
 void stack<T>::push(T const &value)/*strong*/
 {
-	mtxstack.lock();
+	std::lock_guard<std::mutex> locker(mtxstack);//mtxstack.lock();
 	if (allocator_.full())
 		allocator_.resize();
 	allocator_.construct(allocator_.get() + this->count(), value);
-	mtxstack.unlock();
+	//mtxstack.unlock();
 };
 
 template <typename T>
 void stack<T>::pop()/*strong*/
 {
-	mtxstack.lock();
+	std::lock_guard<std::mutex> locker(mtxstack);//mtxstack.lock();
 	if (allocator_.count() == 0)
 	{
 		this->throw_is_empty();
 	}
 	allocator_.destroy(allocator_.get() + (this->count()-1));
-	mtxstack.unlock();
+	//mtxstack.unlock();
 };
 
 template <typename T>
