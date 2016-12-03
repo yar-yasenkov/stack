@@ -245,7 +245,7 @@ template <typename T>
 auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
 {
 	//std::lock_guard<std::mutex> locker_1(mtxstack);
-	std::lock_guard<std::mutex> locker_2(st.mtxstack);
+	std::lock_guard<std::mutex> locker_2(&st.mtxstack);
 	if (this != &st)
 	{
 		
