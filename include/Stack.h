@@ -110,7 +110,7 @@ template<typename T> /*noexcept*/
 allocator<T>::~allocator() {
 	if (this->count() > 0)
 	{
-	    allocator<T>::destroy(ptr_, ptr_ + size_);
+	    allocator<T>::destroy(ptr_, ptr_ + count());
 	   
 	}
 	operator delete(ptr_);
