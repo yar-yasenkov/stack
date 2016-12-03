@@ -291,7 +291,6 @@ auto stack<T>::top()const->T const &
 template <typename T>/*noexcept*/
 auto stack<T>::empty()const->bool 
 {
-	std::lock_guard<std::mutex> locker(mtxstack);
 	return(allocator_.empty() == 1);
 }
 
