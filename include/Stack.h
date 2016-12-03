@@ -274,6 +274,7 @@ void stack<T>::pop()/*strong*/
 template <typename T>
 auto stack<T>::top()-> T&/*strong*/
 {
+	std::lock_guard<std::mutex> locker(mtxstack);
 	if (this->count() > 0) 
 		return(*(allocator_.get() + this->count() - 1));
 	else this->throw_is_empty();
@@ -282,6 +283,7 @@ auto stack<T>::top()-> T&/*strong*/
 template<typename T>
 auto stack<T>::top()const->T const & 
 {
+	std::lock_guard<std::mutex> locker(mtxstack);
 	if (this->count() > 0) 
 		return(*(allocator_.get() + this->count() - 1));
 	else this->throw_is_empty();
