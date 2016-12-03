@@ -238,10 +238,9 @@ auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
 	std::lock(mtxstack, st.mtxstack);
 	if (this != &st)
 	{
-		std::lock_guard<std::mutex> locker_1(mtxstack, std::adopt_lock);
-		std::lock_guard<std::mutex> locker_2(st.mtxstack, std::adopt_lock);
 		(allocator<T>(st.allocator_)).swap(this->allocator_);
 	}
+	std::unlock(mtxstack, st.mtxstack);
 	return *this;
 };
 
