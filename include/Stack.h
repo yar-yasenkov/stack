@@ -129,14 +129,14 @@ auto allocator<T>::construct(T *ptr,T const & val) ->void
 template <typename T>
 auto allocator<T>::destroy(T *ptr)-> void
 {
-	/*if (map_->test(ptr-ptr_))
+	if (map_->test(ptr-ptr_))
 	throw std::logic_error("error");
 	ptr->~T();
-	map_->reset(ptr - ptr_);*/
-	if (!map_->test(ptr - ptr_) && ptr >= ptr_&&ptr <= ptr_ + this->count())
-	{
-		ptr->~T(); map_->reset(ptr - ptr_);
-	}
+	map_->reset(ptr - ptr_);
+	//if (!map_->test(ptr - ptr_) && ptr >= ptr_&&ptr <= ptr_ + this->count())
+	//{
+	//	ptr->~T(); map_->reset(ptr - ptr_);
+	//}
 		
 }
 
@@ -233,22 +233,6 @@ private:
 	auto throw_is_empty()/*strong*/ const -> void;
 };
 
-//template <typename T>
-//auto new_copy(const T * source,  size_t new_size,size_t current_size) -> T*/*strong*/
-//{
-//        T * new_array = new T[new_size];
-//	try
-//	{
-//		std::copy(source, source + current_size, new_array);
-//	}
-//	catch(...)
-//	{
-//		delete []new_array;
-//		throw;
-//	}
-//	return new_array;
-//};
-
 
 template <typename T>/*noexcept*/
 stack<T>::stack(size_t size) : allocator_(size)
@@ -259,9 +243,10 @@ stack<T>::stack(size_t size) : allocator_(size)
 template <typename T>
 auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
 {
-	std::lock_guard<std::mutex> locker(mtxstack);
+	std::lock_guard<std::mutex> locker_1(mtxstack);
 	if (this != &st)
 	{
+		std::lock_guard<std::mutex> locker_2(st.mtxstack);
 		(allocator<T>(st.allocator_)).swap(this->allocator_);
 	}
 	return *this;
@@ -276,23 +261,21 @@ size_t  stack<T>::count() const/*noexcept*/
 template <typename T>
 void stack<T>::push(T const &value)/*strong*/
 {
-	std::lock_guard<std::mutex> locker(mtxstack);//mtxstack.lock();
+	std::lock_guard<std::mutex> locker(mtxstack);
 	if (allocator_.full())
 		allocator_.resize();
 	allocator_.construct(allocator_.get() + this->count(), value);
-	//mtxstack.unlock();
 };
 
 template <typename T>
 void stack<T>::pop()/*strong*/
 {
-	std::lock_guard<std::mutex> locker(mtxstack);//mtxstack.lock();
+	std::lock_guard<std::mutex> locker(mtxstack);
 	if (allocator_.count() == 0)
 	{
 		this->throw_is_empty();
 	}
 	allocator_.destroy(allocator_.get() + (this->count()-1));
-	//mtxstack.unlock();
 };
 
 template <typename T>
