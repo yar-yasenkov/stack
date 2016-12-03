@@ -129,15 +129,11 @@ auto allocator<T>::construct(T *ptr,T const & val) ->void
 template <typename T>
 auto allocator<T>::destroy(T *ptr)-> void
 {
-	if (map_->test(ptr-ptr_))
-	throw std::logic_error("error");
-	ptr->~T();
-	map_->reset(ptr - ptr_);
-	//if (!map_->test(ptr - ptr_) && ptr >= ptr_&&ptr <= ptr_ + this->count())
-	//{
-	//	ptr->~T(); map_->reset(ptr - ptr_);
-	//}
-		
+	if (!map_->test(ptr-ptr_))
+	{
+	    ptr->~T();
+	    map_->reset(ptr - ptr_);	
+	}
 }
 
 template<typename T>
