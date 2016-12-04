@@ -12,17 +12,17 @@ cache:
 
 matrix:
     include:
-        - os: osx
-          compiler: clang
-        - os: linux
-          compiler: gcc
-          env: COMPILER_NAME=gcc CXX=g++-4.9 CC=gcc-4.9
-          addons:
-            apt:
-                packages:
-                    - g++-4.9
-                    - gcc-4.9
-                sources: *sources
+        //- os: osx
+       //   compiler: clang
+       // - os: linux
+       //   compiler: gcc
+       //   env: COMPILER_NAME=gcc CXX=g++-4.9 CC=gcc-4.9
+       //   addons:
+       //     apt:
+       //         packages:
+         //           - g++-4.9
+        //            - gcc-4.9
+        //        sources: *sources
         - os: linux
           compiler: gcc
           env: COMPILER_NAME=gcc CXX=g++-5 CC=gcc-5
