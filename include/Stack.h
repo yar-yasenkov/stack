@@ -173,7 +173,7 @@ auto allocator<T>::destroy(T *first,T *last)-> void
 {
 	if(first>last)
 	throw std::logic_error("errror");
-	for (; first < last; ++first)
+	for (; first <= last; ++first)
 	{
 		destroy(first);
 	}	
