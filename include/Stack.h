@@ -234,9 +234,9 @@ stack<T>::stack(size_t size) : allocator_(size)
 template <typename T>
 auto stack<T>::operator=(const stack & st)-> stack &/*strong*/
 {
-	//std::lock(mtxstack, st.mtxstack);
+        std::lock(st.mtxstack);
 	//std::lock_guard<std::mutex> lock_a(mtxstack, std::adopt_lock);		
- 	std::lock_guard<std::mutex> locker(st.mtxstack);
+ 	std::lock_guard<std::mutex> locker(st.mtxstack, std::adopt_lock);
 	if (this != &st)
 	{
 		(allocator<T>(st.allocator_)).swap(this->allocator_);
