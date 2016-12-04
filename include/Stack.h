@@ -250,7 +250,7 @@ auto stack<T>::operator=(const stack &st)-> stack &/*strong*/
 template <typename T>
 size_t  stack<T>::count() const/*noexcept*/
 {
-	std::lock_guard<std::mutex> locker(mtxstack);
+	//std::lock_guard<std::mutex> locker(mtxstack);
 	return allocator_.count();
 };
 
