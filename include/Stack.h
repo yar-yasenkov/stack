@@ -6,6 +6,7 @@
 #include <functional>
 #include <stdexcept>
 
+
 class bitset
 {
 public:
