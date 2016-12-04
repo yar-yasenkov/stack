@@ -4,7 +4,7 @@
 #include <thread>
 #include <mutex>
 #include <functional>
-
+#include <stdexcept>
 
 class bitset
 {
@@ -222,7 +222,7 @@ public:
 
 private:
 	allocator<T> allocator_;
-        std::mutex mtxstack;
+        mutable std::mutex mtxstack;
 	auto throw_is_empty()/*strong*/ const -> void;
 };
 
