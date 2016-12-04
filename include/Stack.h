@@ -110,12 +110,12 @@ allocator<T>::allocator(size_t size) : ptr_((T*)operator new(size)), size_(size)
 
 template<typename T> /*noexcept*/
 allocator<T>::~allocator() {
-	if (this->count() > 0)
+/*	if (this->count() > 0)
 	{
 	    allocator<T>::destroy(ptr_, ptr_ + count());
 	   
 	}
-	operator delete(ptr_);
+	operator delete(ptr_);*/
 }
 
 template <typename T>
