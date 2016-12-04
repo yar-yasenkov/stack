@@ -110,12 +110,12 @@ allocator<T>::allocator(size_t size) : ptr_((T*)operator new(size)), size_(size)
 
 template<typename T> /*noexcept*/
 allocator<T>::~allocator() {
-/*	if (this->count() > 0)
+	if (this->count() > 0)
 	{
 	    allocator<T>::destroy(ptr_, ptr_ + count());
 	   
 	}
-	operator delete(ptr_);*/
+	operator delete(ptr_);
 }
 
 template <typename T>
@@ -249,6 +249,7 @@ auto stack<T>::operator=(const stack &st)-> stack &/*strong*/
 template <typename T>
 size_t  stack<T>::count() const/*noexcept*/
 {
+	std::lock_guard<std::mutex> locker(mtxstack);
 	return allocator_.count();
 };
 
@@ -293,6 +294,7 @@ auto stack<T>::top()const->T const &
 template <typename T>/*noexcept*/
 auto stack<T>::empty()const->bool 
 {
+	std::lock_guard<std::mutex> locker(mtxstack);
 	return(allocator_.empty() == 1);
 }
 
