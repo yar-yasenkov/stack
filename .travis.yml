@@ -13,13 +13,14 @@ cache:
 
 matrix:
     include:
-      - os: linux
-        compiler: gcc
-        env: COMPILER_NAME=gcc CXX=g++-4.9 CC=gcc-4.9
-        addons:
+   
+        - os: linux
+          compiler: gcc
+          env: COMPILER_NAME=gcc CXX=g++-4.9 CC=gcc-4.9
+          addons:
             apt:
                 packages:
-                     - g++-4.9
+                    - g++-4.9
                     - gcc-4.9
                 sources: *sources
         - os: linux
