@@ -261,7 +261,7 @@ void stack<T>::push(T const &value)/*strong*/
 	std::lock_guard<std::mutex> locker(mtxstack);
 	if (allocator_.full())
 		allocator_.resize();
-	allocator_.construct(allocator_.get() + this->count(), value);
+	allocator_.construct(allocator_.get() + allocator_.count(), value);
 };
 
 template <typename T>
@@ -280,7 +280,7 @@ auto stack<T>::top()-> T&/*strong*/
 {
 	std::lock_guard<std::mutex> locker(mtxstack);
 	if (this->count() > 0) 
-		return(*(allocator_.get() + this->count() - 1));
+		return(*(allocator_.get() + allocator_.count() - 1));
 	else this->throw_is_empty();
 }
 
@@ -289,7 +289,7 @@ auto stack<T>::top()const->T const &
 {
 	std::lock_guard<std::mutex> locker(mtxstack);
 	if (this->count() > 0) 
-		return(*(allocator_.get() + this->count() - 1));
+		return(*(allocator_.get() + allocator_.count() - 1));
 	else this->throw_is_empty();
 }
 
